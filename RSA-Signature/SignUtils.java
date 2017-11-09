@@ -15,7 +15,7 @@ public class SignUtils {
 
     public static String privateKeyPath = "C:\\private.bin";
     public static String publicKeyPath = "C:\\public.bin";
-    public static String signatureAlgorithm = "SHA1withRSA";
+    public static String signatureAlgorithm = "SHA256withRSA";
 //    public static String signatureAlgorithm = "MD5withRSA";
     public static int keySize = 2048;
 //    public static int keySize = 1024;
