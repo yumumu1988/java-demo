@@ -1,5 +1,5 @@
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import org.springframework.util.StringUtils;
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import java.io.BufferedReader;
@@ -65,7 +65,7 @@ public class SignUtils {
         String dataBack = "";
         try{
             if (!StringUtils.isEmpty(data)){
-                byte[] Bytes = sign(data.getBytes(), 0, data.getBytes().length, Base64.decode(getKey(privateKeyPath)));
+                byte[] Bytes = sign(data.getBytes(), 0, data.getBytes().length, (new BASE64Decoder()).decodeBuffer(getKey(privateKeyPath)));
                 dataBack = (new BASE64Encoder()).encodeBuffer(Bytes);
             }
         } catch (Exception e){
@@ -121,7 +121,7 @@ public class SignUtils {
             return Boolean.FALSE.booleanValue();
         }
         try {
-            returnFlag = Boolean.valueOf(verify(data.getBytes(), 0,data.getBytes().length,Base64.decode(getKey(publicKeyPath)), Base64.decode(sign)));
+            returnFlag = Boolean.valueOf(verify(data.getBytes(), 0,data.getBytes().length,(new BASE64Decoder()).decodeBuffer(getKey(publicKeyPath)), (new BASE64Decoder()).decodeBuffer(sign)));
         } catch (Exception e) {
             e.printStackTrace();
         }
